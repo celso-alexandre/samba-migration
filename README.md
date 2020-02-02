@@ -3,25 +3,23 @@
 
 ## How to start
 
-First, I strongly recommend you to install portainer to do everything in here easier thought a web interface. Download portainer at `https://www.portainer.io/`.
+First, I strongly recommend you to install portainer to do everything in here easier through a web interface. Download portainer at `https://www.portainer.io/`.
 
 Before the first run of this image, create a folder at the container path `/var/local/samba/samba-to-compile`, which means you must create a folder in your host machine (in our examples we use `/data/docker/containers/samba/data`) before creating this container, and after that, download the same version you wish to restore from your samba backup. For that, in your old samba server that you wish to replace, run `samba -V`, and then download at `https://download.samba.org/pub/samba/stable/samba-x.y.z.tar.gz`, replacing x.y.z with the right version.
-- Notice that it isn't recommended to directly upgrade your samba version at the same time you are restoring it to a different host (or container, in this case). Instead, the Samba team recommends to restore to the same version, test everything and then read the release notes of every version above yours to know exactly how to upgrade to your desired version (read more: `https://wiki.samba.org/index.php/Upgrading_a_Samba_AD_DC`).
+- Notice that it isn't recommended to directly upgrade your samba version at the same time you are restoring it to a different host (or container, in this case). Instead, the Samba team recommends to restore to the same version, test everything and then read the release notes of the above version, upgrade as recommended there, test everything again and repeat until you get to your desired version, but there's some speedups to (read more: `https://wiki.samba.org/index.php/Upgrading_a_Samba_AD_DC`).
 
 After you download this tar, untar it with `tar -zxf samba-x.y.z.tar.gz`, move the generated `samba-x.y.z` folder contents to `/var/local/samba/samba-to-compile`.
 After that, you can run your container normally as described below and wait while the compilation finishes.
 
-After the compilation finished, you have to restore your samba backups by connecting to the container, downloading your backup file(s) from somewhere and restoring.
-
 ## Backup and restoring
 
-After the compilation finished, you have to restore your samba backups by connecting to the container with `docker container attach <containername>`, downloading your backup file(s) from somewhere and restoring it.
+After the compilation finished, connect to your container with `docker container attach <containername>`, download your backup file(s) from somewhere and restore it.
 
-For backup and restoring samba, I recommend following the instructions in the official Samba docs: `https://wiki.samba.org/index.php/Back_up_and_Restoring_a_Samba_AD_DC`. Notice that there is a warning at the top of the page that warns you to go to `https://wiki.samba.org/index.php/Using_the_samba_backup_script` if your samba version is below 4.9.
+For backup and restoring samba, I recommend reading the instructions find in the official Samba Wiki: `https://wiki.samba.org/index.php/Back_up_and_Restoring_a_Samba_AD_DC`. Notice that there is a warning at the top of the page that warns you to go to `https://wiki.samba.org/index.php/Using_the_samba_backup_script` if your samba version is below 4.9.
 
 ## Activating samba auto-start
 
-To activate samba auto-start, attach to the container and edit `/etc/supervisor/conf.d/supervisord.conf` with nano and uncomment all lines.
+To activate samba auto-start, attach to the container again and edit `/etc/supervisor/conf.d/supervisord.conf` with nano and uncomment all lines.
 
 ## Environment variable for quick start
 * `DOMAIN` defaults to `CORP.EXAMPLE.COM` and should be set to your domain
