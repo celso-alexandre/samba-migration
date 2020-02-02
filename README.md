@@ -5,10 +5,11 @@
 
 First, I strongly recommend you to install portainer to do everything in here easier through a web interface. Download portainer at `https://www.portainer.io/`.
 
-Before the first run of this image, create a folder at the container path `/var/local/samba/samba-to-compile`, which means you must create a folder in your host machine (in our examples we use `/data/docker/containers/samba/data`) before creating this container, and after that, download the same version you wish to restore from your samba backup. For that, in your old samba server that you wish to replace, run `samba -V`, and then download at `https://download.samba.org/pub/samba/stable/samba-x.y.z.tar.gz`, replacing x.y.z with the right version.
+Before the first run of this image, create a folder at the container path `/var/local/samba/samba_to_compile`, which means you must create a folder in your host machine (in our examples we use `/data/docker/containers/samba/data`) before creating this container, and after that, download the same version you wish to restore from your samba backup. For that, in your old samba server that you wish to replace, run `samba -V`, and then download at `https://download.samba.org/pub/samba/stable/samba-x.y.z.tar.gz`, replacing x.y.z with the right version.
 - Notice that it isn't recommended to directly upgrade your samba version at the same time you are restoring it to a different host (or container, in this case). Instead, the Samba team recommends to restore to the same version, test everything and then read the release notes of the above version, upgrade as recommended there, test everything again and repeat until you get to your desired version, but there's some speedups to (read more: `https://wiki.samba.org/index.php/Upgrading_a_Samba_AD_DC`).
 
-After you download this tar, untar it with `tar -zxf samba-x.y.z.tar.gz`, move the generated `samba-x.y.z` folder contents to `/var/local/samba/samba-to-compile`.
+After you download this tar, untar it with `tar -zxf samba-x.y.z.tar.gz`, move the generated `samba-x.y.z` folder contents to the container path `/var/local/samba/samba_to_compile`, which is, in our examples the folder `/data/docker/containers/samba/data` in the host.
+
 After that, you can run your container normally as described below and wait while the compilation finishes.
 
 ## Backup and restoring
@@ -26,8 +27,7 @@ To activate samba auto-start, attach to the container again and edit `/etc/super
 
 ## Volumes for quick start
 * `/etc/localtime:/etc/localtime:ro` - Sets the timezone to match the host
-* `/data/docker/containers/samba/data/:/usr/local/samba` - Stores samba data so the container can be moved to another host if required.
-* `/data/docker/containers/samba/config/samba:/usr/local/samba` - Stores the smb.conf so the container can be moved or updates can be easily made.
+* `/data/docker/containers/samba/data/:/usr/local/samba` - Stores samba data, so you can put your downloaded samba version for compilation inside the `samba_to_compile` sub-folder before the first container run. And this way, it will be easier for you to centralize your backups.
 
 ## Downloading and building
 ```
