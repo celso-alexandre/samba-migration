@@ -14,11 +14,16 @@ appSetup () {
 	LDOMAIN=${DOMAIN,,}
 	UDOMAIN=${DOMAIN^^}
 	URDOMAIN=${UDOMAIN%%.*}
+
+	# If smb.conf does exists, there's no need do compile Samba
+	if [[ ! -f /usr/local/samba/etc/smb.conf ]]; then
 	
-	cd /usr/local/samba/samba_to_compile
-	./configure
-	make -j 6
-	make install
+		cd /usr/local/samba/samba_to_compile
+		./configure
+		make -j 6
+		make install
+		
+	fi
 
 	# Setup Kerberos
 	echo "[libdefaults]" > /etc/krb5.conf
