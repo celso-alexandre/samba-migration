@@ -44,11 +44,11 @@ appSetup () {
 
 		elif [[ ! -d /usr/local/samba/sbin && ! -f /usr/local/samba/samba_to_compile/Makefile ]]; then
 
-			echo "Samba seems not yet compiled, but the /usr/local/samba/samba_to_compile/.configure script could not be found too. Did you forgot, or maybe placed it elsewhere?"
+			echo "Samba seems not yet compiled, but the /usr/local/samba/samba_to_compile/Makefile script could not be found too. Did you forgot, or maybe placed it elsewhere?"
 
 		elif [[ -d /usr/local/samba/sbin ]]; then
 
-			echo "Samba appears to be compiled, but the smb.conf file is not in place. You must restore your backup."
+			echo "Samba appears to be compiled, but the /usr/local/samba/etc/smb.conf file is not in place. You must restore your backup."
 
 		fi
 
