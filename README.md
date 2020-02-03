@@ -14,7 +14,7 @@ After that, you can run your container normally as described below and wait whil
 
 ## Backup and restoring
 
-After the compilation finishes, connect to your container with `docker container attach <containername>`, download your backup file(s) from somewhere and restore it.
+After the compilation finishes, connect to your container with `docker container attach <containername>` or using webmin, download your backup file(s) from somewhere and restore it.
 
 For backup and restoring samba, I recommend reading the instructions find in the official Samba [Wiki](https://wiki.samba.org/index.php/Back_up_and_Restoring_a_Samba_AD_DC). Notice that there is a warning at the top of the page that warns you to see [this page](https://wiki.samba.org/index.php/Using_the_samba_backup_script) if your samba version is below 4.9.
 
