@@ -34,26 +34,26 @@ appSetup () {
 
 	# Is it needed to compile samba?
 	if [[ ! -f /usr/local/samba/etc/smb.conf ]]; then
-		
-		if [[ -f /usr/local/samba/samba_to_compile/.configure && ! -d /usr/local/samba/sbin ]]; then
-			
+
+		if [[ -f /usr/local/samba/samba_to_compile/Makefile && ! -d /usr/local/samba/sbin ]]; then
+
 			cd /usr/local/samba/samba_to_compile
 			./configure
 			make -j 6
 			make install
 
-		else if [[ ! -d /usr/local/samba/sbin && ! -f /usr/local/samba/samba_to_compile/.configure ]]; then
+		elif [[ ! -d /usr/local/samba/sbin && ! -f /usr/local/samba/samba_to_compile/Makefile ]]; then
 
 			echo "Samba seems not yet compiled, but the /usr/local/samba/samba_to_compile/.configure script could not be found too. Did you forgot, or maybe placed it elsewhere?"
 
-		else if [[ -d /usr/local/samba/sbin ]]; then
+		elif [[ -d /usr/local/samba/sbin ]]; then
 
 			echo "Samba appears to be compiled, but the smb.conf file is not in place. You must restore your backup."
-		
+
 		fi
 
-	else; then		
-		
+	else
+
 		appStart
 
 	fi
