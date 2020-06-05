@@ -24,7 +24,7 @@ RUN apt-get install -y apt-show-versions
 # Install webmin dependencies
 RUN apt-get install -y unzip wget libnet-ssleay-perl libauthen-pam-perl libio-pty-perl
 RUN wget -O webmin.deb https://prdownloads.sourceforge.net/webadmin/webmin_1.941_all.deb
-RUN dpkg -i webmin.deb
+RUN apt install ./webmin.deb -y
 
 # Install samba build dependencies
 RUN apt-get install -y python3-dev python2.7-dev
